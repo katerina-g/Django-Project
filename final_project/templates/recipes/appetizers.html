@@ -1,0 +1,28 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block page_content %}
+        <div class="bg">
+          <div class="padding">
+            <div class="wrapper">
+              {% for a in appetizers %}
+                  {% if a %}
+                  <article class="col-3">
+                    <h3>{{ a.recipe_name|title }}</h3>
+                      <img src="{{a.recipe_picture.url}}" alt="..." width="128" height="128">
+                    <p>{{ a.how_to_make }}</p>
+                  <div class="relative"> <a class="button-2" href="{% url 'recipe details' a.pk %}">Read More</a> </div>
+                  </article>
+                   {% else %}
+                      <article>
+                      <h1>Sorry, we have no recipes in this category</h1>
+                      </article>
+                  {% endif %}
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+    <div>
+{#    {% include 'base/footer.html' %}#}
+    </div>
+{% endblock %}

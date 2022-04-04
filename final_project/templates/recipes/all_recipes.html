@@ -1,0 +1,22 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block page_content %}
+        <div class="bg">
+          <div class="padding">
+            <div class="wrapper">
+                {% for recipe in recipes %}
+              <article class="col-3">
+                <h3>{{ recipe.recipe_name|title }}</h3>
+                  <img src="{{recipe.recipe_picture.url}}" alt="..." width="128" height="128">
+                <p>{{ recipe.how_to_make|truncatechars:120 }}</p>
+                <div class="relative"> <a class="button-2" href="{% url 'recipe details' recipe.pk %}">Read More</a> </div>
+              </article>
+                {% endfor %}
+            </div>
+          </div>
+        </div>
+    <div>
+    {% include 'base/footer.html' %}
+    </div>
+{% endblock %}

@@ -1,0 +1,74 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block page_content %}
+    <div class="slider">
+          <ul class="items">
+              {% for r in liked_recipes|slice:":3" %}
+                  <li> <img src="{% static 'images/slider-img2.jpg' %}" alt="" />
+{#                <li> <img src="{{ r.recipe.recipe_picture.url }}" class="pic" style = "width: 613px; height: 324px;"alt="" />#}
+                  <div class="banner"> <strong class="title"> <strong>Hot</strong><em>Recipe</em> </strong>
+                    <p>{{ r.recipe.recipe_name }}</p>
+                    <p>{{ r.recipe.how_to_make|truncatechars:120 }}</p>
+                    <a class="button-1" href="{% url 'recipe details' r.recipe.id%}">Read More</a> </div>
+                </li>
+              {% endfor %}
+          </ul>
+          <a class="banner-2" href="#"></a> </div>
+{#        <ul class="pags">#}
+{#          <li><a href="#">1</a></li>#}
+{#          <li><a href="#">2</a></li>#}
+{#          <li><a href="#">3</a></li>#}
+{#        </ul>#}
+
+        <div class="bg">
+          <div class="padding">
+            <div class="wrapper">
+                {% for recipe in recipes|slice:":3" %}
+                    {% if recipe %}
+                      <article class="col-3">
+                        <h3>{{ recipe.recipe_name|title }}</h3>
+                          <img src="{{recipe.recipe_picture.url}}" alt="..." width="128" height="128">
+                        <p>{{ recipe.category }}</p>
+                        <div class="relative"> <a class="button-2" href="{% url 'recipe details' recipe.pk %}">Read More</a> </div>
+                      </article>
+                    {% endif %}
+                {% endfor %}
+            </div>
+          </div>
+        </div>
+        <div class="padding-2">
+          <div class="indent-top">
+            <div class="wrapper">
+                <h4><strong>Welcome</strong> <em>to Our Site!</em></h4>
+                <p class="color-2 p1">Welcome to our site! Here you will find recipes for every day and for every taste. If you want to post your recipe, comment or like a recipe, please create a profile in our site. Here are our recipes by category:</p>
+                <div class="fright"> <a href="{% url 'create recipe' %}"><img src="{% static 'images/page5-img1.jpg' %}" alt="" /></a> </div>
+                <ul class="list-1">
+                     {% for cat, _ in categories %}
+                         {% if cat == 'Salads' %}
+                         <li><a href="{% url 'salads' %}">{{ cat }}</a></li>
+                         {% elif cat == 'Soups' %}
+                         <li><a href="{% url 'soups' %}">{{ cat }}</a></li>
+                         {% elif cat == 'Appetizers' %}
+                         <li><a href="{% url 'appetizers' %}">{{ cat }}</a></li>
+                         {% elif cat == 'Main dishes' %}
+                         <li><a href="{% url 'main_dishes' %}">{{ cat }}</a></li>
+                         {% elif cat == 'Desserts' %}
+                         <li><a href="{% url 'desserts' %}">{{ cat }}</a></li>
+                         {% elif cat == 'Baked dishes' %}
+                         <li><a href="{% url 'baked dishes' %}">{{ cat }}</a></li>
+                         {% else %}
+                         <li><a href="{% url 'other' %}">{{ cat }}</a></li>
+                         {% endif %}
+                    {% endfor %}
+                </ul>
+
+            </div>
+          </div>
+        </div>
+
+    <div>
+    {% include 'base/footer.html' %}
+    </div>
+{% endblock %}
+
