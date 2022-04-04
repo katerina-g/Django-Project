@@ -1,0 +1,39 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block page_content %}
+        <div class="bg">
+      <div class="padding">
+        <div class="wrapper">
+            <div class="card mb-3" >
+                <img src="{{profile.picture}}" class="card-img-left" alt="..." width="150" height="180">
+                <div class="card-body">
+                <h4 class="card-title">{{profile.first_name}} {{profile.last_name}}</h4>
+
+                <p class="card-text"><b>About me:</b> {{profile.about_me}}</p>
+                    <div>
+                   <a href="{% url 'edit profile' profile.user.pk%}" class="btn btn-outline-warning">Edit Profile</a>
+                   <a href="{% url 'delete profile' profile.user.pk%}" class="btn btn-danger">Delete Profile</a>
+                   <a href="{% url 'create recipe' %}" class="btn btn-warning">Create Recipe</a>
+                    </div>
+                </div>
+            </div>
+        <br>
+          {% if recipes %}
+            <h4 class='text-left'>My recipes:</h4>
+              <br>
+              <div class="col-3">
+                {% for recipe in recipes %}
+                    <ul>
+                        <li>
+                            <h2 class="card-title">{{ recipe.recipe_name|title}} <a href="{% url 'recipe details' recipe.pk %}">Details</a></h2>
+                        </li>
+                    </ul>
+                {% endfor %}
+              </div>
+          {% endif %}
+
+        </div>
+        </div>
+    </div>
+{% endblock %}

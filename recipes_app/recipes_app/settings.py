@@ -22,6 +22,7 @@ INSTALLED_APPS = [
     'recipes_app.accounts',
     'recipes_app.main',
     'recipes_app.recipes',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -107,3 +108,5 @@ MEDIA_URL = '/media/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'accounts.RecipesUser'
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
