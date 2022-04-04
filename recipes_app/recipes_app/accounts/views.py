@@ -74,3 +74,9 @@ class ProfileDetailsView(views.DetailView):
         context['profile'] = self.object
 
         return context
+
+
+class ProfilesListView(views.ListView):
+    template_name = 'accounts/all_profiles.html'
+    context_object_name = 'profiles'
+    model = Profile

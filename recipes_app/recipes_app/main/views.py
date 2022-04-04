@@ -2,6 +2,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect, render
 from django.views import generic as views
 
+from recipes_app.accounts.models import Profile
 from recipes_app.main.forms import CommentRecipeForm
 from recipes_app.main.models import Like, Comment
 from recipes_app.recipes.models import Recipe
@@ -14,9 +15,11 @@ class HomeView(views.TemplateView):
     def get(self, request, *args, **kwargs):
         recipes = Recipe.objects.all().order_by('-created_on')
         liked_recipes = Like.objects.all()
+        profiles = Profile.objects.all()
         categories = Recipe.CATEGORIES
         self.context['recipes'] = recipes
         self.context['liked_recipes'] = liked_recipes
+        self.context['profiles'] = profiles
         self.context['categories'] = categories
         return render(request, self.template_name, self.context)
 
