@@ -5,13 +5,14 @@
     <div class="slider">
           <ul class="items">
               {% for r in liked_recipes|slice:":3" %}
-                  <li> <img src="{% static 'images/slider-img2.jpg' %}" alt="" />
-{#                <li> <img src="{{ r.recipe.recipe_picture.url }}" class="pic" style = "width: 613px; height: 324px;"alt="" />#}
-                  <div class="banner"> <strong class="title"> <strong>Hot</strong><em>Recipe</em> </strong>
+                  {% if r %}
+                    <li> <img src="{{ r.recipe.recipe_picture.url }}" class="pic" style = "width: 613px; height: 324px;"alt="" />
+                    <div class="banner"> <strong class="title"> <strong>Hot</strong><em>Recipe</em> </strong>
                     <p>{{ r.recipe.recipe_name }}</p>
                     <p>{{ r.recipe.how_to_make|truncatechars:120 }}</p>
                     <a class="button-1" href="{% url 'recipe details' r.recipe.id%}">Read More</a> </div>
-                </li>
+                    </li>
+                  {% endif %}
               {% endfor %}
           </ul>
           <a class="banner-2" href="#"></a> </div>
