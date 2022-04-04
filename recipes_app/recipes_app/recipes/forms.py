@@ -46,6 +46,12 @@ class EditRecipeForm(forms.ModelForm):
     class Meta:
         model = Recipe
         exclude = ['created_on', 'created_by', ]
+        widgets = {
+            'recipe_name': forms.TextInput(),
+            'ingredients': forms.Textarea(),
+            'recipe_picture': forms.FileInput(),
+            'how_to_make': forms.Textarea(),
+        }
 
 
 class DeleteRecipeForm(forms.ModelForm):

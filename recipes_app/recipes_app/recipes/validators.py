@@ -1,7 +1,7 @@
 from re import compile
 from django.core.exceptions import ValidationError
 
-pattern = compile(r"^((\w+)(,\s\w+))+$")
+pattern = compile(r"^(([a-zA-Z0-9\s](,)?)*)+$")
 
 
 def validate_ingredients(input_string):
