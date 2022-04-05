@@ -1,5 +1,7 @@
+import profile
+
 from django.contrib.auth import views as auth_views, login, logout
-from django.shortcuts import redirect
+from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from django.views import generic as views
 
@@ -70,9 +72,7 @@ class ProfileDetailsView(views.DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['recipes'] = Recipe.objects.filter(created_by_id=self.request.user.id)
-        context['profile'] = self.object
-
+        context['recipes'] = Recipe.objects.filter(created_by__profile=self.object.pk)
         return context
 
 
@@ -80,3 +80,6 @@ class ProfilesListView(views.ListView):
     template_name = 'accounts/all_profiles.html'
     context_object_name = 'profiles'
     model = Profile
+
+
+
