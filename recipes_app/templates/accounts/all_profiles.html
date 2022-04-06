@@ -1,15 +1,17 @@
-        <div class="bg">
-          <div class="padding">
-            <div class="wrapper">
-                {% for profile in profiles %}
-                    {% if profile %}
+{% if request.user.is_staff or request.user.is_superuser%}
+<div class="bg">
+    <div class="padding">
+        <div class="wrapper">
+            {% for profile in profiles %}
+                {% if profile %}
               <article class="col-3">
                 <h3>{{ profile.first_name }} {{ profile.last_name }}</h3>
                 <p>{{ profile.about_me}}</p>
                 <div class="relative"> <a class="button-2" href="{% url 'profile details' profile.pk %}">Read More</a> </div>
               </article>
-                    {% endif %}
-                {% endfor %}
-            </div>
-          </div>
+                {% endif %}
+            {% endfor %}
         </div>
+    </div>
+</div>
+{% endif %}
