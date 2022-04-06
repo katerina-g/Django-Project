@@ -1,5 +1,5 @@
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import redirect, render
+from django.contrib.auth import mixins as auth_mixin
+from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import generic as views
 
@@ -11,7 +11,7 @@ from recipes_app.recipes.forms import CreateRecipeForm, EditRecipeForm, DeleteRe
 from recipes_app.recipes.models import Recipe
 
 
-class CreateRecipesView(LoginRequiredMixin, RedirectToCreateProfile, views.CreateView):
+class CreateRecipesView(auth_mixin.LoginRequiredMixin, RedirectToCreateProfile, views.CreateView):
     form_class = CreateRecipeForm
     template_name = 'recipes/create.html'
 
@@ -25,7 +25,7 @@ class CreateRecipesView(LoginRequiredMixin, RedirectToCreateProfile, views.Creat
         return super().form_valid(form)
 
 
-class EditRecipeView(LoginRequiredMixin, views.UpdateView):
+class EditRecipeView(auth_mixin.LoginRequiredMixin, views.UpdateView):
     model = Recipe
     template_name = 'recipes/edit_recipe.html'
     form_class = EditRecipeForm
@@ -34,7 +34,7 @@ class EditRecipeView(LoginRequiredMixin, views.UpdateView):
         return reverse_lazy('recipe details', kwargs={'pk': self.object.pk})
 
 
-class DeleteRecipeView(LoginRequiredMixin, views.DeleteView):
+class DeleteRecipeView(auth_mixin.LoginRequiredMixin, views.DeleteView):
     model = Recipe
     form_class = DeleteRecipeForm
     template_name = 'recipes/delete_recipe.html'

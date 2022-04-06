@@ -1,7 +1,6 @@
-import profile
-
+from django.contrib.auth import mixins as auth_mixin
 from django.contrib.auth import views as auth_views, login, logout
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views import generic as views
 
@@ -65,7 +64,7 @@ class DeleteProfileView(views.DeleteView):
     success_url = reverse_lazy('home')
 
 
-class ProfileDetailsView(views.DetailView):
+class ProfileDetailsView(auth_mixin.LoginRequiredMixin, views.DetailView):
     model = Profile
     template_name = 'accounts/details.html'
     context_object_name = 'profile'
