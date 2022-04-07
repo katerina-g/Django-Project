@@ -9,8 +9,8 @@ class CommentAdmin(admin.ModelAdmin):
 
 
 @admin.register(Like)
-class RecipeAdmin(admin.ModelAdmin):
-    list_display = ('recipe', 'user')
+class LikeAdmin(admin.ModelAdmin):
+    list_display = ('recipe',)
 
 
 @admin.register(Article)
