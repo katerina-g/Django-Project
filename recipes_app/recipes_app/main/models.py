@@ -30,20 +30,23 @@ class Like(models.Model):
     )
 
 
-# class Article(models.Model):
-#     TITLE_MAX_LENGTH = 35
-#     TEXT_MAX_LENGTH = 1200
-#
-#     title = models.CharField(
-#         max_length=TITLE_MAX_LENGTH,
-#     )
-#     text = models.CharField(
-#         max_length=TEXT_MAX_LENGTH,
-#     )
-#     created_from = models.ForeignKey(
-#         UserModel,
-#         on_delete=models.CASCADE
-#     )
-#     date_created = models.DateTimeField(
-#         auto_now_add=True,
-#     )
+class Article(models.Model):
+    TITLE_MAX_LENGTH = 45
+    TEXT_MAX_LENGTH = 2800
+
+    title = models.CharField(
+        max_length=TITLE_MAX_LENGTH,
+    )
+    text = models.CharField(
+        max_length=TEXT_MAX_LENGTH,
+    )
+    picture = models.ImageField(
+        upload_to="mediafiles",
+    )
+    created_from = models.ForeignKey(
+        UserModel,
+        on_delete=models.CASCADE
+    )
+    date_created = models.DateTimeField(
+        auto_now_add=True,
+    )

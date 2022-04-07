@@ -1,6 +1,6 @@
 from django import forms
 
-from recipes_app.main.models import Comment
+from recipes_app.main.models import Comment, Article
 
 
 class CommentRecipeForm(forms.ModelForm):
@@ -13,4 +13,23 @@ class CommentRecipeForm(forms.ModelForm):
                     'placeholder': 'Enter Your Comment',
                 }
             ),
+        }
+
+
+class ArticleForm(forms.ModelForm):
+    class Meta:
+        model = Article
+        fields = ['title', 'text', 'picture']
+        widgets = {
+            'title': forms.TextInput(
+                attrs={
+                    'placeholder': 'Article Title',
+                }
+            ),
+            'text': forms.Textarea(
+                attrs={
+                    'placeholder': 'Article Text'
+                }
+            ),
+            'picture': forms.FileInput()
         }

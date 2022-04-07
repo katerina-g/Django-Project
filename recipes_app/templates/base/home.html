@@ -43,7 +43,10 @@
             <div class="wrapper">
                 <h4><strong>Welcome</strong> <em>to Our Site!</em></h4>
                 <p class="color-2 p1">Welcome to our site! Here you will find recipes for every day and for every taste. If you want to post your recipe, comment or like a recipe, please create a profile in our site. Here are our recipes by category:</p>
-                <div class="fright"> <a href="{% url 'create recipe' %}"><img src="{% static 'images/page5-img1.jpg' %}" alt="" /></a> </div>
+                <div class="fright">
+                    <h4><strong>Create</strong> <em>Recipe</em></h4>
+                    <a href="{% url 'create recipe' %}"><img src="{% static 'images/page5-img1.jpg' %}" alt="" /></a>
+                </div>
                 <ul class="list-1">
                      {% for cat, _ in categories %}
                          {% if cat == 'Salads' %}
@@ -67,6 +70,22 @@
             </div>
           </div>
         </div>
+    <div class="bg">
+          <div class="padding">
+            <div class="wrapper">
+                {% for article in articles|slice:":3" %}
+                    {% if article %}
+                      <article class="col-3">
+                        <h3>{{ article.title|title }}</h3>
+                          <img src="{{article.picture.url}}" alt="..." width="128" height="128">
+                        <p>{{ article.text|truncatechars:120 }}</p>
+                        <div class="relative"> <a class="button-2" href="{% url 'article details' article.pk %}">Read More</a> </div>
+                      </article>
+                    {% endif %}
+                {% endfor %}
+            </div>
+          </div>
+    </div>
     {% include 'accounts/all_profiles.html' %}
     <div>
     {% include 'base/footer.html' %}

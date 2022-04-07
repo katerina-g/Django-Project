@@ -1,0 +1,19 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block page_content %}
+    <div class="card mb-3">
+        <img src="{{article.picture.url}}" class="card-img-top" alt="..." width="120" height="400">
+        <h5 class="card-header"><b></b>{{article.name}}</h5>
+        <div class="card-body">
+            <h6>{{article.text}}</h6>
+
+        </div>
+        <div class="card-footer text-muted">
+            Created on : {{ article.date_created }}
+        </div>
+        <div class="card-footer text-muted">
+            Created by : {{ article.created_from }}
+        </div>
+    </div>
+{% endblock %}

@@ -1,10 +1,11 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect, render
+from django.urls import reverse_lazy
 from django.views import generic as views
 
 from recipes_app.accounts.models import Profile
-from recipes_app.main.forms import CommentRecipeForm
-from recipes_app.main.models import Like, Comment
+from recipes_app.main.forms import CommentRecipeForm, ArticleForm
+from recipes_app.main.models import Like, Comment, Article
 from recipes_app.recipes.models import Recipe
 
 
@@ -17,10 +18,12 @@ class HomeView(views.TemplateView):
         liked_recipes = Like.objects.all()
         profiles = Profile.objects.all()
         categories = Recipe.CATEGORIES
+        articles = Article.objects.all().order_by('-date_created')
         self.context['recipes'] = recipes
         self.context['liked_recipes'] = liked_recipes
         self.context['profiles'] = profiles
         self.context['categories'] = categories
+        self.context['articles'] = articles
         return render(request, self.template_name, self.context)
 
 
@@ -63,3 +66,23 @@ class CommentRecipeView(LoginRequiredMixin, views.View):
 
     def form_invalid(self, form):
         pass
+
+
+class CreateArticleView(LoginRequiredMixin, views.CreateView):
+    form_class = ArticleForm
+    template_name = 'base/create_article.html'
+
+    def get_success_url(self):
+        return reverse_lazy('home')
+
+    def form_valid(self, form):
+        article = form.save(commit=False)
+        article.created_from = self.request.user
+        article.save()
+        return super().form_valid(form)
+
+
+class ArticleDetailsView(views.DetailView):
+    model = Article
+    template_name = 'base/article_details.html'
+    context_object_name = 'article'

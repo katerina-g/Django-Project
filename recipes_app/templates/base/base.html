@@ -52,12 +52,14 @@
           <nav>
             <ul class="menu">
               <li><a class="active" href="{% url 'home' %}">Main</a></li>
+              {% if request.user.is_superuser or request.user.is_staff %}
+              <li><a href="{% url 'create article' %}">Create Article</a></li>
+              {% endif %}
               {% if request.user.is_authenticated %}
               <li><a href="{% url 'all recipes' %}">All Recipes</a></li>
                  {% if not user.profile %}
               <li><a href="{% url 'create profile' %}">Create Profile</a></li>
                  {% else %}
-              <li><a href="{% url 'create recipe' %}">Create Recipe</a></li>
               <li><a href="{% url 'profile details' user.profile.pk %}">Profile Details</a></li>
                  {% endif %}
               <li style="float:right"><a href="{% url 'logout' %}">Logout</a></li>

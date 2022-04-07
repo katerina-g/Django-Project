@@ -1,13 +1,18 @@
 from django.contrib import admin
 
-from recipes_app.main.models import Comment, Like
+from recipes_app.main.models import Comment, Like, Article
 
 
 @admin.register(Comment)
-class RecipeAdmin(admin.ModelAdmin):
+class CommentAdmin(admin.ModelAdmin):
     pass
 
 
 @admin.register(Like)
 class RecipeAdmin(admin.ModelAdmin):
     list_display = ('recipe', 'user')
+
+
+@admin.register(Article)
+class ArticleAdmin(admin.ModelAdmin):
+    list_display = ('title', 'text', 'picture')
