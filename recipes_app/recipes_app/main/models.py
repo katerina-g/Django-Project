@@ -18,6 +18,9 @@ class Comment(models.Model):
         on_delete=models.CASCADE,
     )
 
+    def __str__(self):
+        return f'{self.text_comment} {self.recipe}'
+
 
 class Like(models.Model):
     recipe = models.ForeignKey(
@@ -37,7 +40,7 @@ class Article(models.Model):
     title = models.CharField(
         max_length=TITLE_MAX_LENGTH,
     )
-    text = models.CharField(
+    text = models.TextField(
         max_length=TEXT_MAX_LENGTH,
     )
     picture = models.ImageField(
@@ -50,3 +53,6 @@ class Article(models.Model):
     date_created = models.DateTimeField(
         auto_now_add=True,
     )
+
+    def __str__(self):
+        return f'{self.title}'

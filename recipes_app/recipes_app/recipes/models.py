@@ -18,7 +18,7 @@ class Recipe(models.Model):
         max_length=100,
         verbose_name='Recipe Name',
     )
-    ingredients = models.CharField(
+    ingredients = models.TextField(
         max_length=500,
         verbose_name='Ingredients',
         validators=(validate_ingredients,),
@@ -27,7 +27,7 @@ class Recipe(models.Model):
         verbose_name='Recipe Picture',
         upload_to="mediafiles",
     )
-    how_to_make = models.CharField(
+    how_to_make = models.TextField(
         max_length=800,
         verbose_name='How To Make'
     )
