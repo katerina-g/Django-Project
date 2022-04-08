@@ -75,10 +75,6 @@ class ProfileDetailsView(auth_mixin.LoginRequiredMixin, views.DetailView):
         return context
 
 
-class ProfilesListView(views.ListView):
-    template_name = 'accounts/all_profiles.html'
-    context_object_name = 'profiles'
-    model = Profile
 
 
 
