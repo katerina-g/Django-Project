@@ -49,7 +49,7 @@
                 </div>
                 <ul class="list-1">
                      {% for cat, _ in categories %}
-                         {% if cat == 'Salads' %}
+                         {% if cat == 'Salads'%}
                          <li><a href="{% url 'salads' %}">{{ cat }}</a></li>
                          {% elif cat == 'Soups' %}
                          <li><a href="{% url 'soups' %}">{{ cat }}</a></li>

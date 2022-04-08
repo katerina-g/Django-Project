@@ -2,27 +2,25 @@
 {% load static %}
 {% load crispy_forms_tags %}
 {% block page_content %}
-        <div class="bg">
-          <div class="padding">
-            <div class="wrapper">
-              {% for d in main_dishes %}
-                  {% if d %}
-                  <article class="col-3">
-                    <h3>{{ d.recipe_name|title }}</h3>
-                      <img src="{{d.recipe_picture.url}}" alt="..." width="128" height="128">
-                    <p>{{ d.how_to_make }}</p>
-                  <div class="relative"> <a class="button-2" href="{% url 'recipe details' d.pk %}">Read More</a> </div>
-                  </article>
-                   {% else %}
-                      <article>
-                      <h1>Sorry, we have no recipes in this category</h1>
+        {% if main_dishes %}
+            <div class="bg">
+              <div class="padding">
+                <div class="wrapper">
+                  {% for d in main_dishes %}
+                      <article class="col-3">
+                        <h3>{{ d.recipe_name|title }}</h3>
+                          <img src="{{d.recipe_picture.url}}" alt="..." width="128" height="128">
+                        <p>{{ d.how_to_make }}</p>
+                      <div class="relative"> <a class="button-2" href="{% url 'recipe details' d.pk %}">Read More</a> </div>
                       </article>
-                  {% endif %}
-              {% endfor %}
+                  {% endfor %}
+
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-    <div>
-{#    {% include 'base/footer.html' %}#}
-    </div>
+        {% else %}
+            <article>
+                <h3 class="title">Sorry, we have no recipes in this category</h3>
+            </article>
+        {% endif %}
 {% endblock %}
