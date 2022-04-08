@@ -26,6 +26,9 @@
         </div>
         <div class="card-footer text-muted">
             Created by: {{recipe.created_by.profile.first_name}} {{recipe.created_by.profile.last_name}}
+            {% if not is_creator %}
+            <div> <a class="button-1" href="{% url 'profile details' recipe.created_by_id %}">Read More</a> </div>
+            {% endif %}
         </div>
         {% if recipe.likes_count > 0 %}
         <div class="card-footer text-muted">
