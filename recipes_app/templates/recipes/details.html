@@ -27,7 +27,7 @@
         <div class="card-footer text-muted">
             Created by: {{recipe.created_by.profile.first_name}} {{recipe.created_by.profile.last_name}}
             {% if not is_creator %}
-            <div> <a class="button-1" href="{% url 'profile details' recipe.created_by_id %}">Read More</a> </div>
+            <div> <a class="button-3" href="{% url 'profile details' recipe.created_by_id %}">Read More</a> </div>
             {% endif %}
         </div>
         {% if recipe.likes_count > 0 %}
@@ -39,8 +39,9 @@
             <a href="{% url 'edit recipe' recipe.pk %}" class="btn btn-outline-warning" id="bt2">Edit Recipe</a>
             <a href="{% url 'delete recipe' recipe.pk %}" class="btn btn-outline-danger" id="bt3">Delete Recipe</a>
         {% else %}
-            <a href="{% url 'like recipe' recipe.pk %}">
+            <a class="list-group-item" href="{% url 'like recipe' recipe.pk %}">
             {% if not is_liked and user_profile %}
+                LIKE  RECIPE
                 <i class="material-icons">favorite</i>
             {% endif %}
             </a>
