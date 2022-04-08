@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth import models as auth_models
 
 from recipes_app.accounts.managers import UsersManager
+from recipes_app.accounts.validators import validate_only_letters
 
 
 class RecipesUser(auth_models.AbstractBaseUser, auth_models.PermissionsMixin):
@@ -28,10 +29,16 @@ class Profile(models.Model):
 
     first_name = models.CharField(
         max_length=FIRST_NAME_MAX_LEN,
+        validators=(
+            validate_only_letters,
+        ),
     )
 
     last_name = models.CharField(
         max_length=LAST_NAME_MAX_LEN,
+        validators=(
+            validate_only_letters,
+        ),
     )
 
     picture = models.URLField(
