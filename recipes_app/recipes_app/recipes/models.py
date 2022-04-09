@@ -1,7 +1,7 @@
 from django.db import models
 
 from recipes_app.accounts.models import RecipesUser
-from recipes_app.recipes.validators import validate_ingredients
+from recipes_app.recipes.validators import validate_ingredients, validate_picture_max_size
 
 
 class Recipe(models.Model):
@@ -26,6 +26,9 @@ class Recipe(models.Model):
     recipe_picture = models.ImageField(
         verbose_name='Recipe Picture',
         upload_to="mediafiles",
+        validators=(
+            validate_picture_max_size,
+        )
     )
     how_to_make = models.TextField(
         max_length=800,
