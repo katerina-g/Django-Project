@@ -89,7 +89,7 @@ class ProfileDetailsViewTests(TestCase):
             **profile2_credentials,
             user=user2,
         )
-        self.__create_recipe_for_user_profile(user2)
+        recipe_2 = self.__create_recipe_for_user_profile(user2)
 
         response = self.__get_response_for_profile(profile)
 
