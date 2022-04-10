@@ -73,6 +73,27 @@ class ProfileDetailsViewTests(TestCase):
         self.assertEqual(1, len(response.context['recipes']))
         self.assertListEqual([recipe], list(response.context['recipes']))
 
+    def test_when_user_has_recipes__expect_to_return_only_users_recipes(self):
+        user, profile = self.__create_valid_user_and_profile()
+        user2_credentials = {
+            'email': 'test2@abv.bg',
+            'password': '12345qwe',
+        }
+        profile2_credentials = {
+            'first_name': 'Test2',
+            'last_name': 'Test2',
+        }
+        recipe = self.__create_recipe_for_user_profile(user)
+        user2 = self.__create_user(**user2_credentials)
+        profile2 = Profile.objects.create(
+            **profile2_credentials,
+            user=user2,
+        )
+        self.__create_recipe_for_user_profile(user2)
+
+        response = self.__get_response_for_profile(profile)
+
+        self.assertListEqual([recipe], list(response.context['recipes']))
 
 
 
