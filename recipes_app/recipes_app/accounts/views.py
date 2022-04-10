@@ -64,14 +64,15 @@ class DeleteProfileView(views.DeleteView):
     success_url = reverse_lazy('home')
 
 
-class ProfileDetailsView(auth_mixin.LoginRequiredMixin, views.DetailView):
+class ProfileDetailsView(views.DetailView):
     model = Profile
     template_name = 'accounts/details.html'
     context_object_name = 'profile'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['recipes'] = Recipe.objects.filter(created_by__profile=self.object.pk)
+        recipes = Recipe.objects.filter(created_by__profile=self.object.pk)
+        context['recipes'] = recipes
         return context
 
 

@@ -20,7 +20,7 @@ class RecipesUser(auth_models.AbstractBaseUser, auth_models.PermissionsMixin):
 
     USERNAME_FIELD = 'email'
 
-    object = UsersManager()
+    objects = UsersManager()
 
 
 class Profile(models.Model):
