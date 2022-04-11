@@ -10,4 +10,6 @@ class ProfileAdmin(admin.ModelAdmin):
 
 @admin.register(RecipesUser)
 class RecipesUserAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('email', 'last_login')
+    ordering = ('-last_login',)
+
