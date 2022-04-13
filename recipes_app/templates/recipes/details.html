@@ -39,12 +39,14 @@
             <a href="{% url 'edit recipe' recipe.pk %}" class="btn btn-outline-warning" id="bt2">Edit Recipe</a>
             <a href="{% url 'delete recipe' recipe.pk %}" class="btn btn-outline-danger" id="bt3">Delete Recipe</a>
         {% else %}
-            <a class="list-group-item" href="{% url 'like recipe' recipe.pk %}">
+
             {% if not is_liked and user_profile %}
+                <a class="list-group-item" href="{% url 'like recipe' recipe.pk %}">
                 LIKE  RECIPE
                 <i class="material-icons">favorite</i>
+                </a>
             {% endif %}
-            </a>
+
             {% if comments %}
             {% for comment in comments %}
                 {% if comment.recipe_id == recipe.pk %}
