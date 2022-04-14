@@ -160,4 +160,3 @@ class OtherDishesView(views.TemplateView):
         self.context['recipes'] = recipes
         self.context['other'] = other
         return render(request, self.template_name, self.context)
-    

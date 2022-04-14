@@ -2,7 +2,6 @@ from django.contrib.auth import get_user_model
 from django.test import TestCase
 from django.urls import reverse
 
-from recipes_app.accounts.models import Profile
 from recipes_app.main.models import Comment
 from recipes_app.recipes.models import Recipe
 
