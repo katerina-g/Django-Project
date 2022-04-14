@@ -109,3 +109,20 @@ class RecipeDetailsViewTests(TestCase):
         self.assertTrue(response.context['is_liked'])
         self.assertTrue(response.context['is_creator'])
 
+    def test_when_recipe_not_liked__expect_likes_count_to_be_0(self):
+        self.client.force_login(self.user)
+        recipe = self.__create_recipe_for_profile_user(self.user)
+        response = self.client.get(reverse('recipe details', kwargs={
+            'pk': recipe.id,
+        }))
+        self.assertEqual(0, response.context['recipe_likes'])
+
+    def test_when_recipe_is_not_commented__expect_comments_count_to_be_0(self):
+        self.client.force_login(self.user)
+        recipe = self.__create_recipe_for_profile_user(self.user)
+        response = self.client.get(reverse('recipe details', kwargs={
+            'pk': recipe.id,
+        }))
+        self.assertEqual(0, len(response.context['comments']))
+
+

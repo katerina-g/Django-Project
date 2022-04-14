@@ -62,6 +62,7 @@ class RecipeDetailsView(views.DetailView):
                 'recipe_pk': self.object.pk,
             }
         )
+        context['recipe_likes'] = recipe.likes_count
         context['comments'] = Comment.objects.all()
         context['is_creator'] = is_creator
         context['recipe_ingredients'] = recipe_ingredients
@@ -159,3 +160,4 @@ class OtherDishesView(views.TemplateView):
         self.context['recipes'] = recipes
         self.context['other'] = other
         return render(request, self.template_name, self.context)
+    
