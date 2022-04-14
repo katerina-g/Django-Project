@@ -84,3 +84,10 @@ class ArticleDetailsView(views.DetailView):
     model = Article
     template_name = 'base/article_details.html'
     context_object_name = 'article'
+
+
+def handler404(request, exception):
+    context = {}
+    response = render(request, "base/404.html", context=context)
+    response.status_code = 404
+    return response
