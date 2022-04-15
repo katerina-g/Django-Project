@@ -12,6 +12,11 @@
                     <p>{{ r.recipe.how_to_make|truncatechars:120 }}</p>
                     <a class="button-1" href="{% url 'recipe details' r.recipe.id%}">Read More</a> </div>
                     </li>
+                  {% else %}
+                      <li> <img src="{% static 'images/slider-img1.jpg' %}" alt="" />
+                      <div class="banner"> <strong class="title"> <strong>Hot</strong><em>Recipe</em> </strong>
+                        <p class="p3">Post your recipe, collect enough likes, and it can become one of our top recipes!</p>
+                    </li>
                   {% endif %}
               {% endfor %}
           </ul>
