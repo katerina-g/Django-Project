@@ -4,7 +4,7 @@ from django.contrib.auth import get_user_model
 from django.urls import reverse, reverse_lazy
 
 from recipes_app.accounts.models import Profile
-from recipes_app.main.models import Like, Article
+
 from recipes_app.recipes.models import Recipe
 
 UserModel = get_user_model()
